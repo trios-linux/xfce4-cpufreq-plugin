@@ -1,0 +1,17 @@
+Source: xfce4-cpufreq-plugin
+Section: xfce
+Priority: optional
+Maintainer: Filip Danilovic <filip@openmailbox.org>
+Build-Depends: debhelper (>= 9), libgtk2.0-dev, xfce4-panel-dev, libxml2-dev,
+ libcpufreq-dev, intltool, libxfce4ui-1-dev, xfce4-dev-tools, libtool
+Standards-Version: 3.9.6
+Vcs-Svn: svn://anonscm.debian.org/pkg-xfce/goodies/trunk/xfce4-cpufreq-plugin/
+Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-xfce/goodies/trunk/xfce4-cpufreq-plugin/
+
+Package: xfce4-cpufreq-plugin
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: cpufreq information plugin for the Xfce4 panel
+ This plugin displays the current frequency of the CPU, in GHz or MHz as
+ necessary. It also displays the frequency relative to the maximum CPU
+ frequency as an accordingly colored progress bar.

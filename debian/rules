@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+export DEB_LDFLAGS_MAINT_APPEND=-Wl,-z,defs -Wl,--as-needed -Wl,-O1
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+include /usr/share/dpkg/pkg-info.mk
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	mkdir -p m4
+	NOCONFIGURE=1 xdt-autogen
+	dh_auto_configure
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f $$(find -name 'Makefile.in*') compile *.in m4
+	rm -f INSTALL aclocal.m4 config.guess config.sub configure
+	rm -f depcomp install-sh ltmain.sh missing mkinstalldirs
+
+override_dh_install:
+	find debian/$(DEB_SOURCE)/usr/lib/ -name '*.la' -delete
+
+override_dh_makeshlibs:
+	dh_makeshlibs -n -X /usr/lib/$(DEB_HOST_MULTIARCH)/xfce4/panel/plugins
